@@ -12,7 +12,7 @@ services:
   prometheus:
     image: prom/prometheus:v2.0.0
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - prometheus_data2:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -31,7 +31,7 @@ services:
     image: grafana/grafana
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - grafana_provisioning:/etc/grafana/provisioning/
     depends_on:
       - prometheus
     ports:
@@ -51,7 +51,7 @@ services:
       - 9115:9115
     image: prom/blackbox-exporter
     volumes:
-      - ./blackbox/config:/config
+      - blackbox_config:/config
     command:
       - '--config.file=/config/blackbox.yml'
     networks:
@@ -85,9 +85,9 @@ services:
     privileged: true
     image: prom/node-exporter
     volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
+      - sonos_exporter_proc:/host/proc:ro
+      - sonos_exporter_sys:/host/sys:ro
+      - sonos_exporter_root:/rootfs:ro
     ports:
       - 9100:9100
     restart: always
