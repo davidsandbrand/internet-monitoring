@@ -3,6 +3,12 @@ version: "3.1"
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    prometheus_data2: {}
+    grafana_provisioning: {}
+    blackbox_config: {}
+    sonos_exporter_proc: {}
+    sonos_exporter_sys: {}
+    sonos_exporter_root: {}
 
 networks:
   front-tier:
