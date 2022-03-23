@@ -31,7 +31,7 @@ services:
       - ping:ping
       - speedtest:speedtest
     networks:
-      - 'bridge'
+      - back-tier
 
   grafana:
     image: grafana/grafana
@@ -85,7 +85,7 @@ services:
     image: maxandersen/sonos_exporter
     command:
       - '--address=0.0.0.0:1915'
-    network_mode: host
+    network_mode: bridge
 
   nodeexp:
     privileged: true
